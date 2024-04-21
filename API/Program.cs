@@ -18,6 +18,12 @@ builder.Services.AddDbContext<DataContext>(
     ServiceLifetime.Transient
 );
 builder.Services.AddScoped<TvMazeService>();
+builder.Services.AddHttpClient<TvMazeService>(client =>
+{
+    client.BaseAddress = new Uri("https://api.tvmaze.com/");
+});
+
+
 builder.Services.AddScoped<ITvShowRepository, TvShowRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

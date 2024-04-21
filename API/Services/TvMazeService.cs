@@ -1,4 +1,5 @@
 using API.Data;
+using API.Interfaces;
 using API.Models;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -11,12 +12,17 @@ namespace API.Services
     public class TvMazeService
     {
         private readonly HttpClient _httpClient;
+        private readonly DataContext _context;
         private readonly IServiceProvider _serviceProvider;
 
-        public TvMazeService(HttpClient httpClient, IServiceProvider serviceProvider)
+        public TvMazeService(
+            HttpClient httpClient,
+            DataContext context,
+            IServiceProvider serviceProvider
+        )
         {
             _httpClient = httpClient;
-            _httpClient.BaseAddress = new Uri("http://api.tvmaze.com/");
+            _context = context;
             _serviceProvider = serviceProvider;
         }
 
